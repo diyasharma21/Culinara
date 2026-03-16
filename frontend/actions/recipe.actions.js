@@ -308,9 +308,7 @@ instructions: Array.isArray(recipeData.instructions)
 substitutions: Array.isArray(recipeData.substitutions)
   ? recipeData.substitutions
   : [],
-substitutions: Array.isArray(recipeData.substitutions)
-  ? recipeData.substitutions
-  : [],
+
         
         imageUrl: imageUrl || "",
         isPublic: true,
