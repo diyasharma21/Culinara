@@ -1,6 +1,6 @@
 "use server"
 
-import { freePantryScans, ProTierLimit } from "@/lib/arcjet";
+import { freePantryScans, proTierLimit } from "@/lib/arcjet";
 import { checkUser } from "@/lib/checkUser";
 import { request } from "@arcjet/next";
 
@@ -21,7 +21,7 @@ export async function scanPantryImage(formData) {
 
         const isPro= user.subscriptionTier === "pro"
 
-        const arcjetClient = isPro? ProTierLimit : freePantryScans
+        const arcjetClient = isPro? proTierLimit : freePantryScans
 
         const req = await request()
 
