@@ -30,7 +30,7 @@ async function fetchRecipeImage(recipeName) {
       return "";
     }
 
-    const searchQuery = `${recipeName} food close up`;
+    const searchQuery = `${recipeName} `;
 
 const response = await fetch(
   `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&per_page=5&orientation=landscape&content_filter=high`,
@@ -77,15 +77,15 @@ export async function getOrGenerateRecipe(formData) {
 
     // Normalize the title (e.g., "apple cake" → "Apple Cake")
     const normalizedTitle = normalizeTitle(recipeName);
-    const safeTitle = normalizedTitle.replace(/&/g, "and")
-    console.log("🔍 Searching for recipe:", safeTitle);
+    
+    console.log("🔍 Searching for recipe:", normalizedTitle);
 
     const isPro = user.subscriptionTier === "pro";
 
     // Step 1: Check if recipe already exists in DB (case-insensitive search)
     const searchResponse = await fetch(
       `${STRAPI_URL}/api/recipes?filters[title][$eqi]=${encodeURIComponent(
-        safeTitle
+        normalizedTitle
       )}&populate=*`,
       {
         headers: {
@@ -133,7 +133,7 @@ export async function getOrGenerateRecipe(formData) {
     // Step 2: Recipe doesn't exist, generate with Gemini
     console.log("🤖 Recipe not found, generating with Gemini...");
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `
 You are a professional chef and recipe expert. Generate a detailed recipe for: "${normalizedTitle}"
@@ -284,26 +284,37 @@ GENERAL GUIDELINES:
 
     // Step 3: Fetch image from Unsplash
     console.log("🖼️ Fetching image from Unsplash...");
-    const imageUrl = await fetchRecipeImage(safeTitle);
+    const imageUrl = await fetchRecipeImage(normalizedTitle);
 
     // Step 4: Save generated recipe to database
     const strapiRecipeData = {
       data: {
-        title: safeTitle,
+        title: normalizedTitle,
         description: recipeData.description,
         cuisine,
         category,
-        ingredients: JSON.parse(recipe.ingredients || "[]"),
-        instructions: JSON.parse(recipe.instructions || "[]"),
+        ingredients: Array.isArray(recipeData.ingredients)
+  ? recipeData.ingredients
+  : [],
+
+instructions: Array.isArray(recipeData.instructions)
+  ? recipeData.instructions
+  : [],
         prepTime: Number(recipeData.prepTime),
         cookTime: Number(recipeData.cookTime),
         servings: Number(recipeData.servings),
-        nutrition: JSON.parse(recipe.nutrition || "{}"),
-        tips:JSON.parse(recipe.tips || "[]"),
-        substitutions: JSON.parse(recipe.substitutions || "[]"),
+        nutrition: recipeData.nutrition,
+        tips: Array.isArray(recipeData.tips) ? recipeData.tips : [],
+substitutions: Array.isArray(recipeData.substitutions)
+  ? recipeData.substitutions
+  : [],
+substitutions: Array.isArray(recipeData.substitutions)
+  ? recipeData.substitutions
+  : [],
+        
         imageUrl: imageUrl || "",
         isPublic: true,
-        author: user.id,
+        author: user?.id||null,
       },
     };
 
@@ -334,7 +345,7 @@ GENERAL GUIDELINES:
       success: true,
       recipe: {
         ...recipeData,
-        title: safeTitle,
+        title: normalizedTitle,
         category,
         cuisine,
         imageUrl: imageUrl || "",
@@ -541,7 +552,7 @@ export async function getRecipesByPantryIngredients() {
 
     console.log("🥘 Finding recipes for ingredients:", ingredients);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `
 You are a professional chef AI.

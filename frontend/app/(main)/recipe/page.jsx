@@ -342,8 +342,8 @@ function RecipeContent() {
                                              key={i}
                                              className='flex justify-between items-start gap-2 text-stone-700 py-2 border-b border-stone-100 last:border-0'
                                             >
-                                                <span className='flex-1'>{ingredient.item}</span>
-                                                <span className='font-bold text-[#2f8143] text-sm whitespace-nowrap'>
+                                                <span className='flex-1 break-words'>{ingredient.item}</span>
+                                                <span className='font-bold text-[#2f8143] text-sm break-words text-right max-w-[130px]'>
                                                     {ingredient.amount}
                                                 </span>
                                             </li>
@@ -374,28 +374,28 @@ function RecipeContent() {
                                     </div>
 
                                     <div className="bg-stone-50 p-3 text-center border-2 border-stone-100">
-                                      <div className="text-2xl font-bold text-stone-900">
+                                      <div className="text-2xl font-bold text-stone-900 leading-tight">
                                         {recipe.nutrition.protein}
                                      </div>
-                                      <div className="text-xs text-stone-500 font-bold uppercase tracking-wide">
+                                      <div className="text-xs text-stone-500 font-bold uppercase tracking-wide mt-2">
                                         Protein
                                       </div>
                                     </div>
 
                                      <div className="bg-stone-50 p-3 text-center border-2 border-stone-100">
-                                      <div className="text-2xl font-bold text-stone-900">
+                                      <div className="text-2xl font-bold text-stone-900 leading-tight">
                                        {recipe.nutrition.carbs}
                                      </div>
-                                     <div className="text-xs text-stone-500 font-bold uppercase tracking-wide">
+                                     <div className="text-xs text-stone-500 font-bold uppercase tracking-wide mt-2">
                                        Carbs
                                      </div>
                                     </div>
 
                                     <div className="bg-stone-50 p-3 text-center border-2 border-stone-100">
-                                      <div className="text-2xl font-bold text-stone-900">
+                                      <div className="text-2xl font-bold text-stone-900 leading-tight">
                                         {recipe.nutrition.fat}
                                       </div>
-                                      <div className="text-xs text-stone-500 font-bold uppercase tracking-wide">
+                                      <div className="text-xs text-stone-500 font-bold uppercase tracking-wide mt-2">
                                         Fat
                                       </div>
                                     </div>
