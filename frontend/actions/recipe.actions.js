@@ -296,31 +296,25 @@ GENERAL GUIDELINES:
         description: recipeData.description,
         cuisine,
         category,
-        ingredients: JSON.stringify(
-  Array.isArray(recipeData.ingredients)
-    ? recipeData.ingredients
-    : []
-),
+        ingredients: Array.isArray(recipeData.ingredients)
+  ? recipeData.ingredients
+  : [],
 
-instructions: JSON.stringify(
-  Array.isArray(recipeData.instructions)
-    ? recipeData.instructions
-    : []
-),
+instructions: Array.isArray(recipeData.instructions)
+  ? recipeData.instructions
+  : [],
         prepTime: Number(recipeData.prepTime),
         cookTime: Number(recipeData.cookTime),
         servings: Number(recipeData.servings),
-        nutrition: JSON.stringify(recipeData.nutrition || {}),
+        nutrition: recipeData.nutrition || {},
 
-tips: JSON.stringify(
-  Array.isArray(recipeData.tips) ? recipeData.tips : []
-),
+tips: Array.isArray(recipeData.tips)
+  ? recipeData.tips
+  : [],
 
-substitutions: JSON.stringify(
-  Array.isArray(recipeData.substitutions)
-    ? recipeData.substitutions
-    : []
-),
+substitutions: Array.isArray(recipeData.substitutions)
+  ? recipeData.substitutions
+  : [],
 
         
         imageUrl: imageUrl || "",
