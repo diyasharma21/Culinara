@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍳 Culinara – AI-Powered Recipe Platform
 
-## Getting Started
+Culinara is a full-stack AI-powered recipe platform that helps users discover, generate, and manage recipes based on available ingredients.
 
-First, run the development server:
+🔗 Live App: https://culinara-app.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Overview
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Culinara allows users to:
+- Discover recipes from different cuisines
+- Generate recipes using AI
+- Manage pantry ingredients
+- Unlock premium features with Pro plan
+- Save and download recipes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔐 Authentication
 
-To learn more about Next.js, take a look at the following resources:
+- Secure authentication is implemented using **Clerk**
+- Users can:
+  - Sign in with existing accounts
+  - Sign up using email
+- Authentication flow is seamless and secure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏠 Home & Dashboard
 
-## Deploy on Vercel
+- Users can:
+  - Sign in or explore the app from the home page
+- After login, users are redirected to the dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Dashboard Features:
+- **Daily Featured Recipe**
+  - Displays a “Today’s Exclusive Creation”
+  - Automatically updates every day
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Explore by Categories**
+  - Browse recipes by food types
+
+- **Taste the World**
+  - Explore global cuisines (e.g., Indian, Italian, etc.)
+
+---
+
+## 🌍 Explore Recipes
+
+- Users can:
+  - Click on cuisines (e.g., Indian)
+  - Browse available dishes
+- Recipes are dynamically available based on selection
+
+---
+
+## 🥗 My Ingredients (Pantry Management)
+
+Users can manage their ingredients through multiple methods:
+
+- **Manual Entry**
+- **File Upload**
+- **AI Scan (Image-based detection)**
+- **Camera Scan (Mobile support)**
+
+### Smart Cooking Suggestions:
+- Based on added ingredients
+- App suggests multiple recipes users can cook instantly
+
+---
+
+## 🤖 AI Recipe Generation
+
+### 1. “What can I cook?”
+- Uses pantry ingredients
+- Generates multiple recipe suggestions using AI
+
+### 2. “How to Cook” Feature
+- Users can search for any dish (e.g., *Masala Dosa*)
+- Recipe is generated in real-time using AI
+
+### Loading Experience:
+- Smooth and interactive loading UI while generating recipes
+
+---
+
+## 📖 Recipe Details
+
+Each recipe includes:
+
+- Ingredients list
+- Preparation & cooking time
+- Calories per serving
+- Step-by-step instructions
+
+---
+
+## 🔒 Free vs Pro Features
+
+### Free Users:
+- Can view:
+  - Ingredients
+  - Basic instructions
+
+### Pro Users (Grand Chef):
+Unlock access to:
+- Chef Tips
+- Nutrition Facts
+- Ingredient Substitutions
+
+---
+
+## 💳 Pro Upgrade
+
+- Users can upgrade to **Pro (Grand Chef)**
+- Payment is implemented using **Stripe (Test Mode)**
+- After upgrade:
+  - All premium features are unlocked instantly
+
+---
+
+## 💾 Save & Download Recipes
+
+Users can:
+- Save recipes to their collection
+- Download recipes as PDF files
+
+---
+
+## 📚 Saved Recipes
+
+- All saved recipes are stored in a dedicated section
+- Users can access them anytime
+
+---
+
+## 🧠 Tech Stack
+
+- **Frontend:** Next.js, React
+- **Backend:** Strapi (Headless CMS)
+- **Authentication:** Clerk
+- **AI Integration:** Gemini API
+- **Payments:** Stripe (Test Mode)
+- **Image API:** Unsplash
+- **Deployment:** Vercel
+
+---
+
+## ⚠️ Note
+
+- Stripe payments are in **test mode**
+- No real money is charged
+
+---
+
+## 🎯 Conclusion
+
+Culinara provides a complete AI-driven cooking experience by combining:
+- Smart ingredient management
+- Real-time recipe generation
+- Premium feature unlocking
+- Seamless user experience
+
+---
