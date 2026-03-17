@@ -503,7 +503,7 @@ function RecipeContent() {
 
                         {recipe.substitutions && recipe.substitutions.length >0 && (
                             <div className='bg-white p-8 border-2 border-stone-200'>
-                                <h2 className='text-2xl font-bold text-stone-900 mb-4 flex items-center gap-2'>
+                                <h2 className='text-2xl font-bold text-stone-900 mb-4 flex items-center gap-2 '>
                                     Ingredient Substitutions
                                     {!recipeData.isPro && (
                                         <span className='text-xs bg-green-100 text-[#2f8143]  px-2 py-0.5 rounded-full font-semibold'>
@@ -534,7 +534,7 @@ function RecipeContent() {
                                                 </span>
                                                 :
                                             </h3>
-                                            <div className='flex flex-wrap gap-2'>
+                                            <div className='flex flex-wrap gap-2  '>
                                                 {sub.alternatives.map((alt,j) => (
                                                     <Badge
                                                      key={j}

@@ -65,10 +65,13 @@ const response = await fetch(
 // Get or generate recipe details
 export async function getOrGenerateRecipe(formData) {
   try {
-    const user = await checkUser();
-    if (!user) {
-      throw new Error("User not authenticated");
-    }
+    let user = null;
+
+try {
+  user = await checkUser();
+} catch (err) {
+  console.warn("⚠️ Strapi down, continuing as guest");
+}
 
     const recipeName = formData.get("recipeName");
     if (!recipeName) {
@@ -293,26 +296,36 @@ GENERAL GUIDELINES:
         description: recipeData.description,
         cuisine,
         category,
-        ingredients: Array.isArray(recipeData.ingredients)
-  ? recipeData.ingredients
-  : [],
+        ingredients: JSON.stringify(
+  Array.isArray(recipeData.ingredients)
+    ? recipeData.ingredients
+    : []
+),
 
-instructions: Array.isArray(recipeData.instructions)
-  ? recipeData.instructions
-  : [],
+instructions: JSON.stringify(
+  Array.isArray(recipeData.instructions)
+    ? recipeData.instructions
+    : []
+),
         prepTime: Number(recipeData.prepTime),
         cookTime: Number(recipeData.cookTime),
         servings: Number(recipeData.servings),
-        nutrition: recipeData.nutrition,
-        tips: Array.isArray(recipeData.tips) ? recipeData.tips : [],
-substitutions: Array.isArray(recipeData.substitutions)
-  ? recipeData.substitutions
-  : [],
+        nutrition: JSON.stringify(recipeData.nutrition || {}),
+
+tips: JSON.stringify(
+  Array.isArray(recipeData.tips) ? recipeData.tips : []
+),
+
+substitutions: JSON.stringify(
+  Array.isArray(recipeData.substitutions)
+    ? recipeData.substitutions
+    : []
+),
 
         
         imageUrl: imageUrl || "",
         isPublic: true,
-        author: user?.id||null,
+        
       },
     };
 
@@ -364,10 +377,13 @@ substitutions: Array.isArray(recipeData.substitutions)
 // Save recipe to user's collection (bookmark)
 export async function saveRecipeToCollection(formData) {
   try {
-    const user = await checkUser();
-    if (!user) {
-      throw new Error("User not authenticated");
-    }
+   let user = null;
+
+try {
+  user = await checkUser();
+} catch (err) {
+  console.warn("⚠️ Strapi down, continuing as guest");
+}
 
     const recipeId = formData.get("recipeId");
     if (!recipeId) {
@@ -436,8 +452,13 @@ export async function saveRecipeToCollection(formData) {
 // Remove recipe from user's collection (unbookmark)
 export async function removeRecipeFromCollection(formData) {
   try {
-    const user = await checkUser();
-    if (!user) throw new Error("User not authenticated");
+    let user = null;
+
+try {
+  user = await checkUser();
+} catch (err) {
+  console.warn("⚠️ Strapi down, continuing as guest");
+}
 
     const recipeId = formData.get("recipeId");
 
@@ -494,10 +515,13 @@ export async function removeRecipeFromCollection(formData) {
 // Get recipes based on pantry ingredients
 export async function getRecipesByPantryIngredients() {
   try {
-    const user = await checkUser();
-    if (!user) {
-      throw new Error("User not authenticated");
-    }
+    let user = null;
+
+try {
+  user = await checkUser();
+} catch (err) {
+  console.warn("⚠️ Strapi down, continuing as guest");
+}
 
     // ✅ ARCJET RATE LIMIT CHECK
     const isPro = user.subscriptionTier === "pro";
@@ -630,10 +654,13 @@ Ensure the response is **STRICT valid JSON**.
 // Get user's saved recipes
 export async function getSavedRecipes() {
   try {
-    const user = await checkUser();
-    if (!user) {
-      throw new Error("User not authenticated");
-    }
+    let user = null;
+
+try {
+  user = await checkUser();
+} catch (err) {
+  console.warn("⚠️ Strapi down, continuing as guest");
+}
 
     // Fetch saved recipes with populated recipe data
     const response = await fetch(

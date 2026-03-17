@@ -34,11 +34,28 @@ export const checkUser = async () => {
     );
 
     if (!existingUserResponse.ok) {
-      const errorText = await existingUserResponse.text();
-      console.error("Strapi error response:", errorText);
-      return null;
-    }
+  console.warn("⚠️ Strapi temporarily unavailable, retrying...");
 
+  await new Promise(resolve => setTimeout(resolve, 2000));
+
+  const retryResponse = await fetch(
+    `${STRAPI_URL}/api/users?filters[clerkId][$eq]=${user.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  if (!retryResponse.ok) {
+    console.error("Strapi still unavailable");
+    return null;
+  }
+
+  const retryData = await retryResponse.json();
+  return retryData[0] || null;
+}
     const existingUserData = await existingUserResponse.json();
 
     if (existingUserData.length > 0) {
